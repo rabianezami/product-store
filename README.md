@@ -1,16 +1,29 @@
-# React + Vite
+# 🛒 Product Store App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The main idea of this project is to learn how different tools in React are used together, like Redux, React Query, and Context API in one application..
 
-Currently, two official plugins are available:
+## ⚙️ State Management
+- React Query → fetching and caching products
+- Redux Toolkit → shopping cart logic
+- Context API + useReducer → UI settings (theme, layout)
+  
+## 🧱 Tech Stack
+- React
+- Redux Toolkit
+- React Query
+- Context API + useReducer
+- React Router
+- Axios
+- shadcn/ui
+- Tailwind CSS
+  
+## 📁 Project Structure
+- Features-based structure
+- Reusable components
+- Separation of UI and logic
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 How to Run
+```
+npm install
+npm run dev
+```
