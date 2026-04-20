@@ -1,13 +1,13 @@
-import { useState } from 'react'
+
 import './App.css'
-import Logo from './components/common/Logo'
+import Navbar from './components/common/Navbar'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-     <Logo />
+     <Navbar />
+    
     </>
   )
 }
