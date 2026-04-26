@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { useDispatch } from "react-redux"
 import { addToCart } from "@/features/cart/cartSlice"
+import { Link } from "react-router-dom"
 
 
 function clamp(text, n = 90) {
@@ -14,6 +15,7 @@ export default function ProductCard({ product }){
 
    return (
     <Card className="overFlow-hidden" >
+    <Link to={`/product/${product.id}`}>
       <div>
         <img 
          src={product.image}
@@ -22,16 +24,19 @@ export default function ProductCard({ product }){
          loading="lazy"
         />
       </div>
+    </Link>
 
       <CardContent className="p-5">
 
         <div className="flex items-start justify-between gap-3">
+         <Link to={`/product/${product.id}`}>
           <h3>
             {clamp(product.title, 60)}
             <span>
               ${product.price.toFixed(2)}
             </span>
           </h3>
+         </Link>
         </div>
 
         <p className="mt-2 text-xs font-medium text-slate-600">
