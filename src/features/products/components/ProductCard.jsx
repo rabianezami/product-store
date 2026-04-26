@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { useDispatch } from "react-redux"
+import { addToCart } from "@/features/cart/cartSlice"
+
 
 function clamp(text, n = 90) {
     if (!text) return ""
