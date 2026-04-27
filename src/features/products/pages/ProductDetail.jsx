@@ -4,15 +4,20 @@ import LoadingState from "@/components/common/LoadingState"
 import ErrorState from "@/components/common/ErrorState"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { addToCart } from "@/features/cart/cartSlice"
 import AppLayout from "@/components/layout/AppLayout"
+import { toggleWishlist } from "@/features/favorites/wishlistslice"
+import HeartBtn from "@/features/favorites/components/HeartBtn"
 
 export default function ProductDetaile() {
     const { id } = useParams()
 
     const { data: product, isLoading, isError } = useProductDetail(id)
     const dispatch = useDispatch()
+
+    const wishlist = useSelector(state => state.wishlist)
+    const isActive = wishlist.some(item => item.id === product.id)
 
     if (isLoading) return <LoadingState />
     if (isError) return <ErrorState />
@@ -33,9 +38,16 @@ export default function ProductDetaile() {
 
               {/* Info */}
              <div className="space-y-4">
-               <h1 className="text-2xl font-bold leading-sung -mb-1">
+              <div className="flex justify-between -mb-1">
+               <h1 className="text-2xl font-bold leading-sung">
                   {product.title}
                </h1>
+
+               <HeartBtn 
+                 active={isActive}
+                 onClick={() => dispatch(toggleWishlist(product))}
+               />
+              </div>
 
                <p className="text-sm text-slate-500 capitalize">
                  {product.category}
