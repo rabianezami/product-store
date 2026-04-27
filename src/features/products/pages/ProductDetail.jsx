@@ -3,16 +3,22 @@ import useProductDetail from "../api/useProductDetail"
 import LoadingState from "@/components/common/LoadingState"
 import ErrorState from "@/components/common/ErrorState"
 import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { useDispatch } from "react-redux"
+import { addToCart } from "@/features/cart/cartSlice"
+import AppLayout from "@/components/layout/AppLayout"
 
 export default function ProductDetaile() {
     const { id } = useParams()
 
     const { data: product, isLoading, isError } = useProductDetail(id)
+    const dispatch = useDispatch()
 
     if (isLoading) return <LoadingState />
     if (isError) return <ErrorState />
 
     return (
+      <AppLayout title="Product Details">
         <Card className="p-6">
           <CardContent>
               {/* Image */}
@@ -47,10 +53,18 @@ export default function ProductDetaile() {
                  ⭐ {product.rating?.rate}
               </div>   
 
+              <div>
+                <Button 
+                  onClick={() => dispatch(addToCart(product))}
+                >
+                  Add to Card
+                </Button>
+              </div>
+
              </div>
             </div>
           </CardContent>
         </Card>
-
+       </AppLayout>
     )
 }
