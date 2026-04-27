@@ -7,6 +7,7 @@ import Navbar from './components/common/Navbar'
 import ProductList from './features/products/components/ProductList'
 import CartDrawer from './features/cart/components/CartDrawer'
 import ProductDetaile from './features/products/pages/ProductDetail'
+import FavoritePage from './features/favorites/pages/FavoritePage'
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Routes>
               <Route path='/' element={<ProductList />} />
               <Route path='/product/:id' element={<ProductDetaile />}/>
+              <Route path='/favorites' element={<FavoritePage />} />
             </Routes>
           </Container>
         </main>
