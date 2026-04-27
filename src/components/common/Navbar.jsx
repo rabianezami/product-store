@@ -6,6 +6,7 @@ import Logo from "./Logo"
 import { Button } from "../ui/button"
 import UserAvatar from "./UserAvatar"
 import HeartBtn from "./HeartBtn"
+import { Link } from "react-router-dom"
 
 export default function Navbar({ onOpenCart }) {
     const count = useSelector(selectCartCount)
@@ -25,8 +26,10 @@ export default function Navbar({ onOpenCart }) {
                             </span>
                         </Button>
 
-                        <HeartBtn />
-
+                        <Link to="/favorites">
+                          <HeartBtn />
+                        </Link>
+        
                         <UserAvatar />
                     </div>
                 </div>
