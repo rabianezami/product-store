@@ -5,8 +5,9 @@ import Container from "./Container"
 import Logo from "./Logo"
 import { Button } from "../ui/button"
 import UserAvatar from "./UserAvatar"
-import HeartBtn from "./HeartBtn"
+import HeartBtn from "../../features/favorites/components/HeartBtn"
 import { Link } from "react-router-dom"
+import ThemeToggle from "@/features/settings/components/ThemeToggle"
 
 export default function Navbar({ onOpenCart }) {
     const count = useSelector(selectCartCount)
@@ -29,6 +30,8 @@ export default function Navbar({ onOpenCart }) {
                         <Link to="/favorites">
                           <HeartBtn />
                         </Link>
+
+                        <ThemeToggle />
         
                         <UserAvatar />
                     </div>
