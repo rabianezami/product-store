@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { useDispatch } from "react-redux"
+import { useDispatch  , useSelector} from "react-redux"
 import { addToCart } from "@/features/cart/cartSlice"
 import { Link } from "react-router-dom"
+import { toggleWishlist } from "@/features/favorites/wishlistslice"
+import HeartBtn from "@/components/common/HeartBtn"
 
 
 function clamp(text, n = 90) {
@@ -13,18 +15,34 @@ function clamp(text, n = 90) {
 export default function ProductCard({ product }){
    const dispatch = useDispatch()
 
+  const wishlist = useSelector((state) => state.wishlist)
+
+  const isActive = wishlist.some((item) => item.id === product.id)
+
    return (
-    <Card className="overFlow-hidden" >
-    <Link to={`/product/${product.id}`}>
-      <div>
-        <img 
-         src={product.image}
-         alt={product.title}
-         className="h-44 w-44 object-contain mix-blend-multiply"
-         loading="lazy"
-        />
-      </div>
-    </Link>
+   <Card className="overFlow-hidden" >
+    <div className="relative">
+     <Link to={`/product/${product.id}`}>
+     <img 
+       src={product.image}
+       alt={product.title}
+       className="h-44 w-44 object-contain mix-blend-multiply"
+       loading="lazy"
+      />
+     </Link>
+
+  <div className="absolute top-2 right-2">
+    <HeartBtn
+      active={isActive}
+      variant="card"
+      onClick={(e) => {
+        e.stopPropagation()
+        dispatch(toggleWishlist(product))
+      }}
+    />
+  </div>
+
+</div>
 
       <CardContent className="p-5">
 
