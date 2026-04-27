@@ -4,7 +4,7 @@ import { useDispatch  , useSelector} from "react-redux"
 import { addToCart } from "@/features/cart/cartSlice"
 import { Link } from "react-router-dom"
 import { toggleWishlist } from "@/features/favorites/wishlistslice"
-import HeartBtn from "@/components/common/HeartBtn"
+import HeartBtn from "@/features/favorites/components/HeartBtn"
 
 
 function clamp(text, n = 90) {
