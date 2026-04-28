@@ -9,6 +9,7 @@ import { addToCart } from "@/features/cart/cartSlice"
 import AppLayout from "@/components/layout/AppLayout"
 import { toggleWishlist } from "@/features/favorites/wishlistslice"
 import HeartBtn from "@/features/favorites/components/HeartBtn"
+import { toast } from "sonner"
 
 export default function ProductDetaile() {
     const { id } = useParams()
@@ -28,7 +29,7 @@ export default function ProductDetaile() {
           <CardContent>
               {/* Image */}
             <div className="grid md:grid-cols-2 gap-10">
-             <div className="flex justify-center p-4">
+             <div className="flex justify-center p-4 bg-white dark:bg-slate-200/90">
                <img
                 src={product.image}
                 alt={product.title}
@@ -45,7 +46,10 @@ export default function ProductDetaile() {
 
                <HeartBtn 
                  active={isActive}
-                 onClick={() => dispatch(toggleWishlist(product))}
+                 onClick={() => {
+                  dispatch(toggleWishlist(product))
+                  if (!isActive) toast.success("Add to favorites!")
+                }}
                />
               </div>
 
@@ -67,7 +71,10 @@ export default function ProductDetaile() {
 
               <div>
                 <Button 
-                  onClick={() => dispatch(addToCart(product))}
+                  onClick={() => {
+                    dispatch(addToCart(product))
+                    toast.success("Added to cart!")
+                  }}
                 >
                   Add to Card
                 </Button>
