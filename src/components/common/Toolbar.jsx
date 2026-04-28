@@ -26,7 +26,7 @@ export default function Toolbar({ categories = [], category, onCategory, query, 
           </div>
         </div>
 
-        <div className="mt-4 border-t border-slate-200 pt-4">
+        <div className="mt-4 border-t border-border pt-4">
           <CategoryFilter 
             categories={categories}
             value={category}
