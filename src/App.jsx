@@ -8,6 +8,7 @@ import ProductList from './features/products/components/ProductList'
 import CartDrawer from './features/cart/components/CartDrawer'
 import ProductDetaile from './features/products/pages/ProductDetail'
 import FavoritePage from './features/favorites/pages/FavoritePage'
+import { Toaster } from './components/ui/sonner'
 
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
 
 
   return (
-      <div className='min-h-screen bg-gradient-to-b from-slate-50 to-white'>
+      <div className='min-h-screen bg-background text-foreground'>
+        <Toaster position="top-center" richColors closeButton />
         <Navbar onOpenCart={() => setCartOpen(true)} />
         <CartDrawer
           open={cartOpen}
