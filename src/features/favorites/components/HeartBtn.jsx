@@ -8,8 +8,8 @@ export default function HeartBtn({ active, variant = "default", onClick }) {
       onClick={onClick}
       size="icon"
       className={cn(
-        variant === "card" && "text-white bg-black/60 hover:bg-black/80",
-        variant === "navbar" && "text-black"
+        variant === "card" && "text-white bg-background/60  backdrop-blur-sm text-foreground  hover:bg-background/80 shadow-sm",
+        variant === "navbar" && "text-foreground hover:bg-accent"
       )}
     >
       <Heart className={active ? "fill-red-500 text-red-500" : ""} />
