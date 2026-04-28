@@ -15,11 +15,15 @@ export default function ThemeToggle() {
   }
 
   return (
-    <Button onClick={toggleTheme} size="icon">
+    <Button 
+      onClick={toggleTheme}
+      size="icon"
+      className="bg-slate-950 text-white dark:bg-white dark:text-black hover:bg-slate-800 dark:hover:bg-slate-100"
+      >
       {isDark ? (
-        <Sun className="text-white" />
+        <Sun />
       ) : (
-        <Moon className="text-white" />
+        <Moon />
       )}
     </Button>
   )
