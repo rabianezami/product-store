@@ -3,11 +3,11 @@ import { Card, CardContent } from "../ui/card";
 
 export default function ErrorState({ message, onRetry }) {
     return (
-        <main className="min-h-screen bg-gradient-to-br from-slate-100 via-white to-sky-100 py-10 px-4 text-slate-900">
+        <main className="min-h-screen bg-background py-10 px-4 text-foreground transition-colors">
             <div className="mx-auto max-w-3xl">
-                <Card className=" border border-red-200 bg-red-50">
+                <Card className=" border-destructive/20 bg-destructive/10 dark:bg-destructive/5">
                     <CardContent className="p-6">
-                        <h2 className="text-lg font-bold text-red-700">
+                        <h2 className="text-lg font-bold text-destructive">
                             Something went wrong
                         </h2>
                         <p className="mt-2 text-sm text-red-600">
@@ -15,7 +15,7 @@ export default function ErrorState({ message, onRetry }) {
                         </p>
                         <Button
                             onClick={onRetry}
-                            className="mt-4 bg-red-600 hover:bg-red-700"
+                            className="mt-4 bg-destructive/20 text-red-500 hover:bg-destructive/90"
                         >
                             Try Again
                         </Button>
