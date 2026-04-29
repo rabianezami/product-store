@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit"
 import  cartReducer  from "../features/cart/cartSlice"
 import wishlistReducer from "../features/favorites/wishlistslice"
 import { persistStore, persistReducer } from "redux-persist"
+import checkoutReducer from "../features/checkout/checkoutSlice"
 
 const customStorage = {
     getItem: (key) => Promise.resolve(localStorage.getItem(key)),
@@ -12,6 +13,7 @@ const customStorage = {
 const rootReducer = combineReducers({
     cart: cartReducer,
     wishlist: wishlistReducer,
+    checkout: checkoutReducer,
 })
 
 const persistConfig = {
