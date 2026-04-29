@@ -8,9 +8,11 @@ export default function ThemeToggle() {
   const isDark = state.theme === "dark"
 
   const toggleTheme = () => {
+    const nextTheme = state.theme === "dark" ? "light" : "dark";
+
     dispatch({
       type: "SET_THEME",
-      payload: isDark ? "light" : "dark",
+      payload: nextTheme,
     })
   }
 
