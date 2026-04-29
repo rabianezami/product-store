@@ -1,10 +1,42 @@
-import { configureStore } from "@reduxjs/toolkit"
+import { configureStore, combineReducers } from "@reduxjs/toolkit"
 import  cartReducer  from "../features/cart/cartSlice"
 import wishlistReducer from "../features/favorites/wishlistslice"
+import { persistStore, persistReducer } from "redux-persist"
+
+const customStorage = {
+    getItem: (key) => Promise.resolve(localStorage.getItem(key)),
+    setItem: (key, value) => Promise.resolve(localStorage.setItem(key, value)),
+    removeItem: (key) => Promise.resolve(localStorage.removeItem(key)),
+}
+
+const rootReducer = combineReducers({
+    cart: cartReducer,
+    wishlist: wishlistReducer,
+})
+
+const persistConfig = {
+    key: "root",
+    storage: customStorage,
+    whitelist: ["cart", "wishlist"]
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore ({
-    reducer: {
-        cart: cartReducer,
-        wishlist: wishlistReducer,
-    }
-})
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+         getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [
+          "persist/PERSIST",
+          "persist/REHYDRATE",
+          "persist/REGISTER",
+          "persist/FLUSH",
+          "persist/PAUSE",
+          "persist/PURGE",
+        ],
+      },
+    }),
+});
+     
+export const persistor = persistStore(store)
