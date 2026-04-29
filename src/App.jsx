@@ -9,6 +9,7 @@ import CartDrawer from './features/cart/components/CartDrawer'
 import ProductDetaile from './features/products/pages/ProductDetail'
 import FavoritePage from './features/favorites/pages/FavoritePage'
 import { Toaster } from './components/ui/sonner'
+import CheckoutPage from './features/checkout/pages/CheckoutPage'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
               <Route path='/' element={<ProductList />} />
               <Route path='/product/:id' element={<ProductDetaile />}/>
               <Route path='/favorites' element={<FavoritePage />} />
+              <Route path='/checkout' element={<CheckoutPage />} />
             </Routes>
           </Container>
         </main>

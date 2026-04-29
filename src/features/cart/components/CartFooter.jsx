@@ -3,9 +3,14 @@ import { useDispatch } from "react-redux";
 import { clearCart } from "../cartSlice";
 import { useNavigate } from "react-router-dom";
 
-export default function CartFooter({ total, items }) {
+export default function CartFooter({ total, items, onClose }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const handleCheckout = () => {
+        navigate("/checkout")
+        if (onClose) onClose()
+    }
 
     return (
         <div className="border-t p-5">
@@ -29,6 +34,7 @@ export default function CartFooter({ total, items }) {
                 <Button
                   className="flex-1"
                   disabled={items.length === 0}
+                  onClick={handleCheckout}
                 >
                     Checkout
                 </Button>
