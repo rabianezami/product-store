@@ -2,18 +2,33 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { checkoutSchema } from "../validation/checkoutSchema"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { clearCart } from "@/features/cart/cartSlice"
 import InputField from "@/components/common/form/InputField"
+import { useEffect } from "react"
+import {updateField } from "../checkoutSlice"
 
 
 export default function CheckoutForm({ setLoading}) {
     const dispatch = useDispatch()
 
-     const { register, handleSubmit, reset, formState: { errors }, } = useForm({
+    const savedInfo = useSelector((state) => state.checkout.shippingInfo)
+
+     const { register, handleSubmit, reset, watch, formState: { errors }, } = useForm({
         resolver: yupResolver(checkoutSchema),
-        mode: ontouchend,
+        mode: "onTouched",
+        defaultValues: savedInfo
     })
+
+    const formValues = watch()
+
+    useEffect(() => {
+     Object.keys(formValues).forEach((key) => {
+      if (formValues[key] !== savedInfo[key]) {
+        dispatch(updateField({ field: key, value: formValues[key] }));
+       }
+     });
+    }, [formValues, dispatch, savedInfo]);
     
 
     const onSubmit = async (data) => {
