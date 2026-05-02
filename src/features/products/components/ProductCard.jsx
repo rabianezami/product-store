@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { toggleWishlist } from "@/features/favorites/wishlistslice"
 import HeartBtn from "@/features/favorites/components/HeartBtn"
 import { toast } from "sonner"
+import ViewToggle from "@/features/settings/components/ViewToggle"
 
 
 function clamp(text, n = 90) {
@@ -13,7 +14,7 @@ function clamp(text, n = 90) {
   return text.length > n ? text.slice(0, n).trim() + "..." : text
 }
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, view}) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = useSelector((state) => state.auth.user)
@@ -22,14 +23,23 @@ export default function ProductCard({ product }) {
 
   const isActive = wishlist.some((item) => item.id === product.id)
 
+  const isList = view === "list"
+
   return (
-    <Card className="overFlow-hidden bg-card text-card-foreground" >
-      <div className="relative p-4 flex justify-center items-center  bg-white dark:bg-slate-200/90">
+    <Card 
+      className={`overFlow-hidden bg-card text-card-foreground w-full ${
+       isList ? "flex flex-row items-start gap-4 p-4" : ""
+     }`} 
+    >
+      <div className={`relative p-4 flex justify-center items-center  bg-white dark:bg-slate-200/90 ${
+        isList ? "w-28 h-28 flex-shrink-0" : "p-4"
+       }`}
+      >
         <Link to={`/product/${product.id}`}>
           <img
             src={product.image}
             alt={product.title}
-            className="h-44 w-44 object-contain "
+            className={isList ? "h-44 w-44 object-contain " : "h-44 w-44 object-contain"}
             loading="lazy"
           />
         </Link>
@@ -50,7 +60,8 @@ export default function ProductCard({ product }) {
 
       </div>
 
-      <CardContent className="p-5">
+      {/* CONTENT */}
+      <CardContent className={isList ? "flex-1 p-2" : "p-5"}>
 
         <div className="flex items-start justify-between gap-3">
           <Link to={`/product/${product.id}`}>

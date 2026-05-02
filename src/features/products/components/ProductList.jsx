@@ -5,6 +5,8 @@ import EmptyState from "@/components/common/EmptyState";
 import ProductGrid from "./ProductGrid";
 import LoadingState from "@/components/common/LoadingState";
 import ErrorState from "@/components/common/ErrorState";
+import { useSettings } from "@/features/settings/context/SettingsContext";
+import ViewToggle from "@/features/settings/components/ViewToggle";
 
 function normalize(s) {
   return String(s || "").toLowerCase().trim()
@@ -14,6 +16,8 @@ export default function ProductList() {
   const [search, setSearch] = useState("")
   const [category, setCategory] = useState("all")
   const [sort, setSort] = useState("featured")
+
+  const { state } = useSettings()
  
   const { data = [], isLoading, isError, error, refetch} = useProducts()
 
@@ -66,14 +70,18 @@ export default function ProductList() {
         onSort={setSort}
       />
 
+     <div className="mt-6">
+       <ViewToggle />
+     </div>
+
       {visible.length === 0 ? (
         <EmptyState 
           title="No products found"
           subtitle="Try changing filters"
         />
       ) : (
-        <div className="mt-4">
-          <ProductGrid products={visible} />
+        <div className="mt-2">
+          <ProductGrid products={visible} view={state.view} />
         </div>
       )}
     </div>
