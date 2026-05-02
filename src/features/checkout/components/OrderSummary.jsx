@@ -15,7 +15,7 @@ export default function OrderSummary({ loading }) {
         {items.map((item) => (
           <div key={item.id} className="flex justify-between text-sm">
             <span className="text-muted-foreground line-clamp-1">{item.title} x{item.quantity}</span>
-            <span>${(item.price * item.quantity).toFixed(2)}</span>
+            <span>${(item.price * item.qty).toFixed(2)}</span>
           </div>
         ))}
         <Separator />
