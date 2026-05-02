@@ -10,13 +10,15 @@ import ProductDetaile from './features/products/pages/ProductDetail'
 import FavoritePage from './features/favorites/pages/FavoritePage'
 import { Toaster } from './components/ui/sonner'
 import CheckoutPage from './features/checkout/pages/CheckoutPage'
+import LoginPage from './features/auth/pages/LoginPage'
+import MainLayout from './components/layout/MainLayout'
+import AuthLayout from './components/layout/AuthLayout'
 
 
 function App() {
 
   const [cartOpen, setCartOpen] = useState(false)
-
-
+  
   return (
       <div className='min-h-screen bg-background text-foreground'>
         <Toaster position="top-center" richColors closeButton />
@@ -25,16 +27,20 @@ function App() {
           open={cartOpen}
           onClose={() => setCartOpen(false)}
         />
-        <main className='py-8'>
-          <Container>
+        
             <Routes>
-              <Route path='/' element={<ProductList />} />
-              <Route path='/product/:id' element={<ProductDetaile />}/>
-              <Route path='/favorites' element={<FavoritePage />} />
-              <Route path='/checkout' element={<CheckoutPage />} />
+              <Route element={<MainLayout />}>
+               <Route path='/' element={<ProductList />} />
+               <Route path='/product/:id' element={<ProductDetaile />}/>
+               <Route path='/favorites' element={<FavoritePage />} />
+               <Route path='/checkout' element={<CheckoutPage />} />
+              </Route>
+
+              <Route element={<AuthLayout />}>
+                <Route path='/login' element={<LoginPage />} />
+              </Route>
             </Routes>
-          </Container>
-        </main>
+
       </div>
   )
 }
