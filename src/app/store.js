@@ -3,7 +3,8 @@ import  cartReducer  from "../features/cart/cartSlice"
 import wishlistReducer from "../features/favorites/wishlistslice"
 import { persistStore, persistReducer } from "redux-persist"
 import checkoutReducer from "../features/checkout/checkoutSlice"
-
+import authReducer from "../features/auth/authSlice"
+ 
 const customStorage = {
     getItem: (key) => Promise.resolve(localStorage.getItem(key)),
     setItem: (key, value) => Promise.resolve(localStorage.setItem(key, value)),
@@ -14,12 +15,13 @@ const rootReducer = combineReducers({
     cart: cartReducer,
     wishlist: wishlistReducer,
     checkout: checkoutReducer,
+    auth: authReducer,
 })
 
 const persistConfig = {
     key: "root",
     storage: customStorage,
-    whitelist: ["cart", "wishlist", "checkout"]
+    whitelist: ["cart", "wishlist", "checkout", "auth"]
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
