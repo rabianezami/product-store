@@ -10,18 +10,22 @@ import AppLayout from "@/components/layout/AppLayout"
 import { toggleWishlist } from "@/features/favorites/wishlistslice"
 import HeartBtn from "@/features/favorites/components/HeartBtn"
 import { toast } from "sonner"
+import { useNavigate } from "react-router-dom"
 
 export default function ProductDetaile() {
     const { id } = useParams()
 
     const { data: product, isLoading, isError } = useProductDetail(id)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const user = useSelector((state) => state.auth.user)
 
     const wishlist = useSelector(state => state.wishlist)
-    const isActive = wishlist.some(item => item.id === product.id)
 
     if (isLoading) return <LoadingState />
     if (isError) return <ErrorState />
+
+    const isActive = wishlist.some(item => item.id === product?.id)
 
     return (
       <AppLayout title="Product Details">
@@ -72,6 +76,11 @@ export default function ProductDetaile() {
               <div>
                 <Button 
                   onClick={() => {
+                    if (!user) {
+                      navigate("/login", {state: {from: location.pathname } })
+                      toast.error("Please login first")
+                      return
+                    }
                     dispatch(addToCart(product))
                     toast.success("Added to cart!")
                   }}
