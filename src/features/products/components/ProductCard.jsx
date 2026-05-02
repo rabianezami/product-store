@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { useDispatch, useSelector } from "react-redux"
 import { addToCart } from "@/features/cart/cartSlice"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { toggleWishlist } from "@/features/favorites/wishlistslice"
 import HeartBtn from "@/features/favorites/components/HeartBtn"
 import { toast } from "sonner"
@@ -15,6 +15,8 @@ function clamp(text, n = 90) {
 
 export default function ProductCard({ product }) {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const user = useSelector((state) => state.auth.user)
 
   const wishlist = useSelector((state) => state.wishlist)
 
@@ -74,6 +76,12 @@ export default function ProductCard({ product }) {
 
           <Button
             onClick={() => {
+              if (!user) {
+                navigate("/login", { state: {from: location.pathname} })
+                toast.error("Please login first")
+                return
+              }
+
               dispatch(addToCart(product))
               toast.success("Added to cart")
             }}
